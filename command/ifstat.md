@@ -19,8 +19,9 @@ wget http://gael.roualland.free.fr/ifstat/ifstat-1.1.tar.gz
 ```
 tar -zxvf ifstat-1.1.tar.gz
 cd ifstat-1.1
-./configure            #默认会安装到/usr/local/bin/目录中
-make ;make  install
+./configure            
+make
+make install # 默认会安装到/usr/local/bin/目录中
 ```
 
 注释：执行`which ifstat`输出`/usr/local/bin/ifstat`
@@ -48,8 +49,20 @@ make ;make  install
 
 ### 实例  
 
+默认使用
+
 ```
-[root@flow_video]# ifstat -tT
+[root@localhost ifstat-1.1] #ifstat
+       eth0                eth1       
+ KB/s in  KB/s out   KB/s in  KB/s out
+    0.07      0.20      0.00      0.00
+    0.07      0.15      0.58      0.00
+```
+
+默认ifstat不监控回环接口，显示的流量单位是KB。
+
+```
+[root@localhost ifstat-1.1]# ifstat -tT
   time           eth0                eth1                eth2                eth3               Total      
 HH:MM:ss   KB/s in  KB/s out   KB/s in  KB/s out   KB/s in  KB/s out   KB/s in  KB/s out   KB/s in  KB/s out
 16:53:04      0.84      0.62   1256.27   1173.05      0.12      0.18      0.00      0.00   1257.22   1173.86
@@ -59,5 +72,15 @@ HH:MM:ss   KB/s in  KB/s out   KB/s in  KB/s out   KB/s in  KB/s out   KB/s in  
 16:53:08      0.73      0.40    924.02   1248.91      0.00      0.00      0.00      0.00    924.76   1249.31
 ```
 
+监控所有网络接口
+
+```
+[root@localhost ifstat-1.1] # ifstat -a
+        lo                 eth0                eth1       
+ KB/s in  KB/s out   KB/s in  KB/s out   KB/s in  KB/s out
+    0.00      0.00      0.28      0.58      0.06      0.06
+    0.00      0.00      1.41      1.13      0.00      0.00
+    0.61      0.61      0.26      0.23      0.00      0.00
+```
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
